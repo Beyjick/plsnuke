@@ -18,65 +18,7 @@ local ROBUX_THUMB    = "rbxthumb://type=Asset&id=11713337409&w=150&h=150"
 local NUKE_THRESHOLD = 10000
 local NUKE_LAND_POS  = Vector3.new(166.436, 6.485, 307.588)
 
-local function createLoadingScreen()
-    local loadGui = Instance.new("ScreenGui")
-    loadGui.Name = "FazoxLoader"
-    loadGui.ResetOnSpawn = false
-    loadGui.DisplayOrder = 99999
-    loadGui.IgnoreGuiInset = true
-    loadGui.Parent = playerGui
 
-    local danceSnd = Instance.new("Sound")
-    danceSnd.SoundId = "rbxassetid://1837823558"
-    danceSnd.Volume = 0.9
-    danceSnd.Looped = false
-    danceSnd.Parent = playerGui
-    pcall(function() danceSnd:Play() end)
-    task.delay(10, function() pcall(function() danceSnd:Stop(); danceSnd:Destroy() end) end)
-
-    local bg = Instance.new("Frame", loadGui)
-    bg.Size = UDim2.new(1,0,1,0)
-    bg.BackgroundColor3 = Color3.fromRGB(4,3,8)
-    bg.BorderSizePixel = 0
-
-    local dancerFrame = Instance.new("Frame", bg)
-    dancerFrame.Size = UDim2.fromOffset(110, 110)
-    dancerFrame.AnchorPoint = Vector2.new(0, 1)
-    dancerFrame.Position = UDim2.new(0.06, 0, 0.88, 0)
-    dancerFrame.BackgroundTransparency = 1
-    dancerFrame.ZIndex = 20
-    local dancerLbl = Instance.new("TextLabel", dancerFrame)
-    dancerLbl.Size = UDim2.new(1,0,1,0)
-    dancerLbl.BackgroundTransparency = 1
-    dancerLbl.Text = "🕺"
-    dancerLbl.TextSize = 70
-    dancerLbl.Font = Enum.Font.GothamBlack
-    dancerLbl.TextXAlignment = Enum.TextXAlignment.Center
-    dancerLbl.TextYAlignment = Enum.TextYAlignment.Center
-    dancerLbl.TextColor3 = Color3.fromRGB(255,255,255)
-    dancerLbl.ZIndex = 20
-    local dancerCaption = Instance.new("TextLabel", bg)
-    dancerCaption.Size = UDim2.fromOffset(200, 20)
-    dancerCaption.AnchorPoint = Vector2.new(0, 1)
-    dancerCaption.Position = UDim2.new(0.02, 0, 0.92, 0)
-    dancerCaption.BackgroundTransparency = 1
-    dancerCaption.Text = "Loading... stay calm! 🎶"
-    dancerCaption.Font = Enum.Font.GothamBold
-    dancerCaption.TextSize = 12
-    dancerCaption.TextColor3 = Color3.fromRGB(200,150,255)
-    dancerCaption.TextXAlignment = Enum.TextXAlignment.Left
-    dancerCaption.ZIndex = 20
-    task.spawn(function()
-        local t = 0
-        while loadGui and loadGui.Parent do
-            task.wait(0.04)
-            t = t + 0.04
-            pcall(function()
-                dancerLbl.Rotation = math.sin(t * 5) * 20
-                dancerFrame.Position = UDim2.new(0.06, 0, 0.88 + math.sin(t * 6) * 0.025, 0)
-            end)
-        end
-    end)
 
     local stemGlow = Instance.new("Frame", bg)
     stemGlow.Size = UDim2.fromOffset(60, 0)
